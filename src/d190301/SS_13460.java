@@ -106,7 +106,7 @@ public class SS_13460 {
 		switch (qd.dir) {
 		case 0:
 			for (int i = qd.y; i < H; i++) {
-				if (toy[i][qd.x].equals("O")) {
+				if (toy[i][qd.x].equals("O")) {	// hey!
 					return true;
 				} else if (!toy[i][qd.x].equals(".")) {
 					toy[qd.y][qd.x] = ".";
