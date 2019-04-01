@@ -7,10 +7,12 @@ public class SS_16236 {
 	
 	static boolean[][] visited;
 	static boolean finished = false;
+	static int N;
 	static int ans = 0;
-	static int size = 2;
+	static int size = 2;				// 생선 크
+	static int count = 2;				// 먹어야 하는 회
 	
-	static int[] dx = {0,1,0,-1};
+	static int[] dx = {0,-1,0,1};
 	static int[] dy = {1,0,-1,0};
 
 	public static void main(String[] args) {
@@ -31,7 +33,7 @@ public class SS_16236 {
 		
 		
 		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
+		N = sc.nextInt();
 		int iniX=0, iniY=0;
 		visited = new boolean[N][N];
 		int[][] map = new int[N][N];
@@ -41,23 +43,38 @@ public class SS_16236 {
 				if(map[i][j]==9) {
 					iniX = j;
 					iniY = i;
+					visited[i][j] = true;
 				}
 			}
 		}
 		ArrayList<Cord> que = new ArrayList<>();
+		
 		Cord c = new Cord(iniX, iniY);
 		que.add(c);
+		int dept = 1;
+		int nowX=0, nowY=0;
 		while(!finished) {
+			Cord food = new Cord(-1,-1,100);
 			while(!que.isEmpty()) {
 				Cord cd = que.get(0);
 				que.remove(0);
-				int nowX = cd.getX();
-				int nowY = cd.getY();
+				nowX = cd.getX();
+				nowY = cd.getY();
 				for(int i=0; i<4; i++) {
-					isOk(nowX, nowY, map, i, que);
+					move(nowX, nowY, map, i, que, dept, food);
 				}
+				dept++;
 			}
-			if(true) finished = true;
+			if(food.getDept()!=100) {
+				eating();
+				ans += food.getDept();
+				dept = 1;
+				que.clear();
+				que.add(new Cord(food.getX(), food.getY()));
+				map[nowY][nowX] = 0;
+				map[food.getY()][food.getX()] = 9;
+				visited[food.getY()][food.getX()] = true;
+			} else finished = true;
 		}
 		
 		System.out.println(ans);
@@ -65,20 +82,29 @@ public class SS_16236 {
 		sc.close();
 	}
 	
-	static void isOk(int x, int y, int[][] map, int dir, ArrayList<Cord> que) {
+	static void move(int x, int y, int[][] map, int dir, ArrayList<Cord> que, int dept, Cord food) {
 		if(map[y+dy[dir]][x+dx[dir]]<=size && !visited[y+dy[dir]][x+dx[dir]]) {
 			visited[y+dy[dir]][x+dx[dir]] = true;
-			Cord cord = new Cord(x+dx[dir], y+dy[dir]);
-			que.add(cord);
+			if(map[y+dy[dir]][x+dx[dir]]<size && map[y+dy[dir]][x+dx[dir]]!=0) {
+				if((food.getY()<y+dy[dir]) || (food.getY()==y+dy[dir]&&food.getX()>x+dx[dir])) {
+					food.setX(x);
+					food.setY(y);
+					food.setDept(dept);
+				}
+			} else {
+				Cord cord = new Cord(x+dx[dir], y+dy[dir], dept);
+				que.add(cord);
+			}
 		}
 	}
 	
-	static void move() {
+	static void eating() {
 		
-	}
-	
-	static boolean isEat() {
-		return false;
+		if(--count==0) {
+			size++;
+			count = size;
+		}
+		visited = new boolean[N][N];
 	}
 
 }
