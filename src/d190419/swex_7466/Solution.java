@@ -25,9 +25,12 @@
 //System.out.println(var);		       				   // 문자열 1개 출력하는 예제
 //System.out.println(AB);		       				     // long 변수 1개 출력하는 예제
 /////////////////////////////////////////////////////////////////////////////////////////////
-package d190419;
+package d190419.swex_7466;
+import java.math.BigInteger;
+import java.util.Iterator;
+import java.util.NavigableSet;
 import java.util.Scanner;
-import java.io.FileInputStream;
+import java.util.TreeSet;
 
 /*
    사용하는 클래스명이 Solution 이어야 하므로, 가급적 Solution.java 를 사용할 것을 권장합니다.
@@ -35,6 +38,9 @@ import java.io.FileInputStream;
  */
 class Solution
 {
+    static TreeSet<Integer>[] factorSet;
+    static int MAX = 1000000000;
+
     public static void main(String args[]) throws Exception
     {
 		/*
@@ -56,15 +62,61 @@ class Solution
 		   여러 개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 		*/
 
+		factorSet = new TreeSet[1000];
+		for(int i=0; i<factorSet.length; i++){
+            factorSet[i] = new TreeSet<Integer>();
+        }
+
+        factorSet[0].add(1);
+        factorSet[1].add(1);
+
         for(int test_case = 1; test_case <= T; test_case++)
         {
-
-            /////////////////////////////////////////////////////////////////////////////////////////////
-			/*
-				 이 부분에 여러분의 알고리즘 구현이 들어갑니다.
-			 */
-            /////////////////////////////////////////////////////////////////////////////////////////////
-
+            int n = sc.nextInt();
+            int k = sc.nextInt();
+            BigInteger bigN = factorial(n);
+            //checkFact(n);
+            //int gcd = gcd(n, k);
+            BigInteger bigGcd = bigN.gcd(new BigInteger(""+k));
+            //System.out.println("#"+test_case+" "+gcd);
+            System.out.println("#"+test_case+" "+bigGcd);
         }
+    }
+
+    static TreeSet<Integer> checkFact(int n){
+        if(factorSet[n].size()==0){
+            TreeSet<Integer> tmp = checkFact(n-1);
+            factorSet[n].addAll(tmp);
+            Iterator<Integer> it = tmp.iterator();
+            while(it.hasNext()){
+                int nowInt = it.next();
+                if(nowInt*n > MAX) break;
+                factorSet[n].add(nowInt*n);
+            }
+        }
+        return factorSet[n];
+    }
+
+    static int gcd(int n, int k) {
+        int ans = 1;
+        NavigableSet<Integer> tmp = factorSet[n].headSet(k, true);
+        Iterator<Integer> it = tmp.descendingIterator();
+        while(it.hasNext()){
+            int nowInt = it.next();
+            if(k%nowInt==0) {
+                ans = nowInt;
+                break;
+            }
+        }
+
+        return ans;
+    }
+
+    static BigInteger factorial(int n) {
+        BigInteger bigFact = new BigInteger("1");
+        for(int i=1; i<=n; i++){
+            bigFact = bigFact.multiply(new BigInteger(""+i));
+        }
+        return bigFact;
     }
 }
