@@ -4,37 +4,48 @@ import java.util.Scanner;
 
 class Solution
 {
-    public static void main(String args[]) throws Exception
+    static int[][] graph;
+    static boolean[] visited;
+    public static void main(String args[])
     {
         Scanner sc = new Scanner(System.in);
         int T;
         T=sc.nextInt();
-		/*
-		   여러 개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
-		*/
-
         for(int test_case = 1; test_case <= T; test_case++)
         {
             int n = sc.nextInt();
             int m = sc.nextInt();
-            int[][] graph = new int[n][n];
-            int ans = 0;
-            boolean[] visited = new boolean[m];
-
+            graph = new int[n+1][n+1];
+            int ans = 1;
+            visited = new boolean[n+1];
             for(int i=0; i<m; i++){
                 int a = sc.nextInt();
                 int b = sc.nextInt();
                 graph[a][b] = 1;
                 graph[b][a] = 1;
             }
-
+            for(int i=1; i<n+1; i++){
+                if(!visited[i]){
+                    dfs(i, n+1);
+                    for(int j=1; j<n+1; j++) {
+                        if(!visited[j]) {
+                            ans++;
+                            break;
+                        }
+                    }
+                }
+            }
             System.out.println("#"+test_case+" "+ans);
         }
-
         sc.close();
     }
 
-    static void dfs(){
-        int aa = 1;
+    static void dfs(int n, int tot){
+        if(!visited[n]) {
+           visited[n] = true;
+           for(int i=1; i<tot; i++){
+               if(graph[n][i]==1 && !visited[i]) dfs(i, tot);
+           }
+        }
     }
 }
