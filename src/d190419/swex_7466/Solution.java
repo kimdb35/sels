@@ -21,16 +21,21 @@ class Solution
             int n = sc.nextInt();
             int k = sc.nextInt();
             int ans = 1;
+            int temp = 0;
 
             if(n>=k) ans = k;
             else {
                 for(int i=1; i<=n; i++){
                     if(k>=i) {
-                        if(k%i==0){
-                            ans = ans * i;
-                            k = k/i;
-                        }
-                    } else break;
+                        temp = gcd(k, i);
+                        ans = ans * temp;
+                        k = k/temp;
+                    } else {
+                        temp = gcd(i, k);
+                        ans = ans*temp;
+                        k = k/temp;
+                    }
+                    if(k==1) break;
                 }
             }
             System.out.println("#"+test_case+" "+ans);
