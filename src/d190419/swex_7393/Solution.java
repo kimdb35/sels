@@ -15,7 +15,6 @@ class Solution
             int n = sc.nextInt();
             int ans = 0;
             if(n > 10){
-
             } else if(n==10) ans = 1;
             else ans = 0;
 
