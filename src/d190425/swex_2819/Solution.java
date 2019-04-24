@@ -9,18 +9,19 @@ public class Solution {
 	 * 2. depth 줘서 0일때까지 탐색
 	 * 3. 전체 탐색하기
 	 * 4. 탐색 시, 가장자리 탐색이 중요하다.. 쉽게 하는 법을 생각해보자
+	 * 5. +2 해서 빈칸 만들었다
 	 */
 	static int[] dx = {0, -1, 0, 1};
 	static int[] dy = {1, 0, -1, 0};
-	static int[][] graph = new int[4][4];
+	static int[][] graph = new int[6][6];
 	static HashSet<String> set = new HashSet<String>();
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int T= sc.nextInt();
 		for(int test_case=1; test_case<=T; test_case++) {
 			int ans = 0;
-			for(int i=0; i<4; i++) {
-				for(int j=0; j<4; j++) {
+			for(int i=1; i<=4; i++) {
+				for(int j=1; j<=4; j++) {
 					graph[i][j] = sc.nextInt();
 				}
 			}
