@@ -9,8 +9,8 @@ public class SS_16234 {
 		Scanner sc = new Scanner(System.in);
 		
 		int N = sc.nextInt();
-		int L = sc.nextInt();
-		int R = sc.nextInt();
+//		int L = sc.nextInt();
+//		int R = sc.nextInt();
 		int[][] map = new int[N][N];
 		
 		for(int i=0; i<N; i++) {

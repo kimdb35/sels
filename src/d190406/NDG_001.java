@@ -20,7 +20,6 @@ public class NDG_001 {
 			str[i] = sc.nextLine();
 			strList.add(str[i]);
 		}
-		int[] a = new int[n];
 		for(int i=0; i<n; i++) {
 			String tmp = "1";
 			for(int j=97; j<=122; j++) {

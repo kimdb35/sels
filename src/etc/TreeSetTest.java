@@ -18,11 +18,11 @@ public class TreeSetTest {
         ts.add(6);
         ts.add(3);
         ts.add(2);
+        
+        //TreeSet<Integer> desc = (TreeSet<Integer>) ts.descendingSet();
 
-        TreeSet<Integer> desc = (TreeSet<Integer>) ts.descendingSet();
-
-        Iterator it = ts.iterator();
-        Iterator itd = ts.descendingIterator();
+        Iterator<Integer> it = ts.iterator();
+        Iterator<Integer> itd = ts.descendingIterator();
 
         System.out.println(ts);
         System.out.println(ts.descendingSet());

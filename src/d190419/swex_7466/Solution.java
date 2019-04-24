@@ -40,6 +40,8 @@ class Solution
             }
             System.out.println("#"+test_case+" "+ans);
         }
+        
+        sc.close();
     }
 
     static int gcd(int n, int k) {
