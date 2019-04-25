@@ -33,7 +33,7 @@ public class Solution {
     static int move(int[][] map, int x, int y) {
         while(y>=0){
             if(y==0) {
-                return x;
+                return x-1;
             }
             if(map[y][x+1]!=0) {
                 while(map[y][++x+1]!=0);
