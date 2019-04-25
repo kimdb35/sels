@@ -9,8 +9,8 @@ public class SS_16236 {
 	static boolean finished = false;	// 더 이상 남은 먹이가 없을때..
 	static int N;
 	static int ans = 0;
-	static int size = 2;				// 생선 크
-	static int count = 2;				// 먹어야 하는 회
+	static int size = 2;				// 생선 크기
+	static int count = 2;				// 먹어야 하는 회수
 	
 	static int[] dx = {0,-1,0,1};
 	static int[] dy = {1,0,-1,0};
@@ -154,15 +154,10 @@ class Cord{				// 먹이 위치때문에 클래스 만듦
 	public void setY(int y) {
 		this.y = y;
 	}
-
 	public int getDept() {
 		return dept;
 	}
-
 	public void setDept(int dept) {
 		this.dept = dept;
 	}
-	
-	
-	
 }
