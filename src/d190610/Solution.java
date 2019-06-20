@@ -37,6 +37,7 @@ public class Solution {
                 MAP[17][i] = 8;
             }
 
+            /*  이건 그냥 MAP 확인용
             System.out.println("====="+testCase);
             for(int i=0; i<18; i++) {
                 for(int j=0; j<18; j++) {
@@ -45,6 +46,7 @@ public class Solution {
                 System.out.println();
             }
             System.out.println("====="+testCase);
+            */
 
             LinkedList<Cord_1226> que = new LinkedList<>();
             que.add(new Cord_1226(start[0], start[1]));
