@@ -1,7 +1,6 @@
 package d190508.swex_1247;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 // 1247 최적 경로
@@ -20,12 +19,11 @@ import java.util.Scanner;
  */
 public class Solution {
 
-    static ArrayList<Cord_1247> cord = new ArrayList<>();
+    static ArrayList<Cord_1247> cord;
     static int[][] dp;
     static int ans;
-    static int[] start = new int[2];
-    static int[] end = new int[2];
-    static int cnt = 0;
+    static int[] start;
+    static int[] end;
 
     public static void main(String[] args) {
 
@@ -34,8 +32,11 @@ public class Solution {
         int T = sc.nextInt();
         for(int test_case=1; test_case<=T; test_case++){
             ans = 999999;
+            cord = new ArrayList<>();
             int N = sc.nextInt();
             dp = new int[N+2][N+2];
+            start = new int[2];
+            end = new int[2];
             boolean[] visited = new boolean[N];
             int[] idxArr = new int[N];
             start[0] = sc.nextInt();         // x
@@ -53,7 +54,6 @@ public class Solution {
             perm(idxArr, 0);
 
             System.out.println("#"+test_case+" "+ans);
-            System.out.println(cnt);
         }
         sc.close();
     }
