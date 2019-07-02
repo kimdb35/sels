@@ -16,35 +16,34 @@ public class Main {
             arr[i] = sc.nextInt();
         }
         int[] tmpArr = new int[7];
-        for(int idx=0; idx<arr.length; idx++) {
-            dfs(0, idx, arr, tmpArr);
-        }
+        doCombi(9, 7, 0, 0, arr, tmpArr);
         for(int num : ans) {
             System.out.println(num);
         }
         sc.close();
     }
 
-    static void dfs(int dept, int idx, int[] arr, int[] tmp) {
+    static void doCombi(int n, int r, int index, int target, int[] arr, int[] ansArr) {
         if(!flag) {
-            if (idx == 9) {
+            if(r==0) {
                 int res = 0;
-                for (int ii = 0; ii < tmp.length; ii++) {
-                    res += tmp[ii];
+                for(int atom : ansArr) {
+                    res += atom;
                 }
-                if (res == 100) {
-                    ans = tmp;
+                if(res==100) {
+                    ans = ansArr;
                     Arrays.sort(ans);
                     flag = true;
                 }
                 return;
-            }
-            tmp[dept] = arr[idx];
-            for(int i=idx+1; i<=arr.length; i++) {
-                if(dept == 6) {
-                    dfs(dept, i, arr, tmp);
-                } else dfs(dept+1, i, arr, tmp);
+            } else if(n==target) {
+                return;
+            } else {
+                ansArr[index] = arr[target];
+                doCombi(n, r-1, index+1, target+1, arr, ansArr);
+                doCombi(n, r, index, target+1, arr, ansArr);
             }
         }
     }
+
 }
